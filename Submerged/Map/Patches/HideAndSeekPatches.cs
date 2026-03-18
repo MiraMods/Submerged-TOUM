@@ -2,7 +2,7 @@ using System.Linq;
 using HarmonyLib;
 using Submerged.Extensions;
 using Submerged.Systems.Elevator;
-using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__35;
+using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__34;
 
 namespace Submerged.Map.Patches;
 
@@ -33,7 +33,7 @@ public static class HideAndSeekPatches
         });
     }
 
-    [HarmonyPatch(typeof(IntroCutscene_CoBegin), nameof(IntroCutscene_CoBegin.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene_CoBegin), "MoveNext")]
     [HarmonyPrefix]
     public static bool DisplaySpawnInBeforeGameStartsPatch(IntroCutscene_CoBegin __instance, ref bool __result)
     {

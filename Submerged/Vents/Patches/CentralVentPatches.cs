@@ -55,7 +55,7 @@ public static class CentralVentPatches
             vector -= new Vector2(0, 0.2f);
         }
 
-        [HarmonyPatch(typeof(PlayerPhysics_CoExitVent), nameof(PlayerPhysics_CoExitVent.MoveNext))]
+        [HarmonyPatch(typeof(PlayerPhysics_CoExitVent), "MoveNext")]
         [HarmonyPrefix]
         public static void EnablePatch(PlayerPhysics_CoExitVent __instance)
         {
@@ -65,7 +65,7 @@ public static class CentralVentPatches
             _enableSnapToPatch = true;
         }
 
-        [HarmonyPatch(typeof(PlayerPhysics_CoExitVent), nameof(PlayerPhysics_CoExitVent.MoveNext))]
+        [HarmonyPatch(typeof(PlayerPhysics_CoExitVent), "MoveNext")]
         [HarmonyPostfix]
         public static void DisablePatch()
         {
