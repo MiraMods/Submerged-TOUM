@@ -11,42 +11,41 @@ public class Draggable(nint ptr) : ClickableSprite(ptr)
     public bool dragging;
     public Vector3 initialPosition;
 
-    private Camera _mainCam;
-
     private Vector2 _offset;
 
-    private void Awake()
+    public override void Awake()
     {
-        _mainCam = Camera.main;
+        base.Awake();
         initialPosition = transform.position;
+        onDown += OnDownHandler;
+        onDrag += OnDragHandler;
+        onUp += OnUpHandler;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (dragging && !Input.GetMouseButton(0))
-        {
-            dragging = false;
-            onUp?.Invoke();
-        }
+        onDown -= OnDownHandler;
+        onDrag -= OnDragHandler;
+        onUp -= OnUpHandler;
     }
 
-    public override void OnMouseDown()
+    private void OnDownHandler()
     {
-        _offset = (Vector2) transform.position - (Vector2) _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        _offset = (Vector2) transform.position - controller.DragStartPosition;
         dragging = true;
-        onDown?.Invoke();
     }
 
-    public override void OnMouseDrag()
+    private void OnDragHandler()
     {
         if (forceStop) return;
         if (!dragging) return;
 
-        Vector2 newPos = (Vector2) _mainCam.ScreenToWorldPoint(Input.mousePosition) + _offset;
+        Vector2 newPos = controller.DragPosition + _offset;
         transform.position = new Vector3(newPos.x, newPos.y, initialPosition.z);
-
-        onDrag?.Invoke();
     }
 
-    public override void OnMouseUp() { } // Not used for draggable update used instead
+    private void OnUpHandler()
+    {
+        dragging = false;
+    }
 }
