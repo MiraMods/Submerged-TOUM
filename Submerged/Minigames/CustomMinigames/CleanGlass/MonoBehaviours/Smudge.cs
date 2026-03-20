@@ -45,15 +45,16 @@ public sealed class Smudge(nint ptr) : MonoBehaviour(ptr)
         }
 
         if (!draggable.dragging) return;
-        Vector2 mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-        bool mouseInCollider = _collider2D.OverlapPoint(mousePosition);
-        if (!wiping) _previousPosition = mousePosition;
+
+        Vector2 inputPosition = draggable.controller.DragPosition;
+        bool mouseInCollider = draggable.controller.CheckHover(_collider2D);
+        if (!wiping) _previousPosition = inputPosition;
 
         if (!mouseInCollider) return;
         wiping = true;
 
-        float delta = (mousePosition - _previousPosition).SqrMagnitude() * 9f;
-        _previousPosition = mousePosition;
+        float delta = (inputPosition - _previousPosition).SqrMagnitude() * 9f;
+        _previousPosition = inputPosition;
         health -= delta;
         _squeakThreshold -= delta;
 

@@ -20,7 +20,7 @@ public class ClickableSprite(nint ptr) : MonoBehaviour(ptr)
     public Action onUp;
     public Action onUpAsButton;
 
-    protected Controller controller = new Controller();
+    public Controller controller = new Controller();
     protected Camera mainCam;
 
     private Collider2D _collider2D;
