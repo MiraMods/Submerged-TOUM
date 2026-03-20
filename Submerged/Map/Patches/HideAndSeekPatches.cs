@@ -2,7 +2,11 @@ using System.Linq;
 using HarmonyLib;
 using Submerged.Extensions;
 using Submerged.Systems.Elevator;
+#if ANDROID
 using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__34;
+#else
+using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__35;
+#endif
 
 namespace Submerged.Map.Patches;
 

@@ -8,13 +8,19 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Submerged = Debug|Submerged
+		Debug|Android = Debug|Android
 		Release|Submerged = Release|Submerged
+		Release|Android = Release|Android
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Debug|Submerged.ActiveCfg = Debug|Submerged
 		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Debug|Submerged.Build.0 = Debug|Submerged
 		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Release|Submerged.ActiveCfg = Release|Submerged
 		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Release|Submerged.Build.0 = Release|Submerged
+		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Debug|Android.ActiveCfg = Debug|Android
+		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Debug|Android.Build.0 = Debug|Android
+		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Release|Android.ActiveCfg = Release|Android
+		{13ACAAD7-C0BE-468C-8710-14C77F7C24BA}.Release|Android.Build.0 = Release|Android
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
