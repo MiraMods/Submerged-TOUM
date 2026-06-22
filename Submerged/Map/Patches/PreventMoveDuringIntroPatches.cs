@@ -1,13 +1,17 @@
 using HarmonyLib;
 using Submerged.Extensions;
+#if ANDROID
+using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__34;
+#else
 using IntroCutscene_CoBegin = IntroCutscene._CoBegin_d__35;
+#endif
 
 namespace Submerged.Map.Patches;
 
 [HarmonyPatch]
 public static class PreventMoveDuringIntroPatches
 {
-    [HarmonyPatch(typeof(IntroCutscene_CoBegin), nameof(IntroCutscene_CoBegin.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene_CoBegin), "MoveNext")]
     [HarmonyPrefix]
     public static void AssignIntroCutsceneInstancePatch(IntroCutscene_CoBegin __instance, ref bool __result)
     {

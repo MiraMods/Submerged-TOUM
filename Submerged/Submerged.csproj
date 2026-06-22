@@ -16,12 +16,17 @@
         <DebugType>embedded</DebugType>
         <DebugSymbols>true</DebugSymbols>
         <Configurations>Debug;Release</Configurations>
-        <Platforms>Submerged</Platforms>
+        <Platforms>Submerged;Android</Platforms>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Platform)'=='Android'">
+        <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="AmongUs.GameLibs.Steam" Version="2025.11.18" />
+        <PackageReference Include="AmongUs.GameLibs.Android" Version="2026.3.17" Condition="'$(Platform)'=='Android'" />
+        <PackageReference Include="AmongUs.GameLibs.Steam" Version="2025.11.18" Condition="'$(Platform)'=='Submerged'" />
         <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.735" />
         <PackageReference Include="Reactor" Version="2.5.0-ci.371" />
 
@@ -33,8 +38,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="**\Resources\**" />
-        <EmbeddedResource Remove="**\Resources\**\*.cs" />
+        <EmbeddedResource Include="Resources\Images\**" />
+        <EmbeddedResource Include="Resources\AssetBundles\submerged-android" Condition="'$(Platform)'=='Android'" LogicalName="submerged" />
+        <EmbeddedResource Include="Resources\AssetBundles\submerged" Condition="'$(Platform)'=='Submerged'" LogicalName="submerged" />
         <EmbeddedResource Update="Localization\Strings\Deprecated.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Deprecated.Designer.cs</LastGenOutput>
@@ -68,7 +74,7 @@
         </EmbeddedResource>
     </ItemGroup>
 
-    <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">
+    <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != '' And '$(Platform)' == 'Submerged'">
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AmongUs)/BepInEx/plugins/" UseSymboliclinksIfPossible="true" />
     </Target>
 
